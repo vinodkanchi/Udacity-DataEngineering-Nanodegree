@@ -1,0 +1,24 @@
+Udaconnect application is transformed from a monolith to microservice architecture.
+I have used the following to model the microservice architecture.
+
+1. Kafka
+2. gRPC
+3. RESTful API endpoint
+
+There was no need to divide the frontend on microservices.
+
+In the backend, I felt the need to separate it into person, location microservice and location producer.
+
+Person API was created without any changes.
+RESTful API was used for easy integration with various HTTP routes for the data of the person.
+Connection microservice uses RESTful API because of its simplicity and maintainability.
+
+To handle large amount of data and streaming it, Kafka and gRPC was used for performance in the location producer.
+
+
+
+
+
+
+
+

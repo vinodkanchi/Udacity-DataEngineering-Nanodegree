@@ -1,0 +1,124 @@
+---
+openapi: 3.0.0
+info:
+  title: home-iot-api
+  description: The API for the EatBacon IOT project
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/VIKN14EC_1/udaconnect/1.0.0
+  description: SwaggerHub API Auto Mocking
+paths:
+  /api/persons:
+    get:
+      tags:
+      - gets information of the person
+      summary: gets the information of all people
+      description: Gets the information of people for all users in the PersonAPI
+      operationId: getAllPersons
+      responses:
+        "200":
+          description: search by personId
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+        "400":
+          description: bad input parameter
+        "404":
+          description: company not found
+    post:
+      tags:
+      - creates a new person
+      summary: creates a new person record
+      description: By passing the correct payload, a new person is created
+      operationId: createPerson
+      requestBody:
+        description: Create a person
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonNoId'
+        required: true
+      responses:
+        "201":
+          description: create new person
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+        "400":
+          description: bad input parameter
+  /api/persons/{personId}:
+    get:
+      tags:
+      - gets person by id
+      summary: gets person information by id
+      description: Gets person information by their unique id
+      operationId: getPersonById
+      parameters:
+      - name: personId
+        in: path
+        description: getting the person ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: search by personId
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+        "400":
+          description: bad input parameter
+        "404":
+          description: company not found
+components:
+  schemas:
+    Person:
+      required:
+      - company_name
+      - first_name
+      - id
+      - last_name
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        first_name:
+          type: string
+          example: Bob
+        last_name:
+          type: string
+          example: Marley
+        company_name:
+          type: string
+          example: Bosch
+    PersonNoId:
+      required:
+      - company_name
+      - first_name
+      - last_name
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 143
+        first_name:
+          type: string
+          example: Vinod
+        last_name:
+          type: string
+          example: Kumar
+        company_name:
+          type: string
+          example: IBM

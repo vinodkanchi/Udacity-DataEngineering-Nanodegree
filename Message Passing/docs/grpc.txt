@@ -1,0 +1,26 @@
+Documentation of the gRPC endpoint
+
+The location of the message is defined in the .proto file
+
+The location message is defined as shown below:
+message LocationMessage {
+    int32 person_id = 1;
+    string latitude = 2;
+    string longitude = 3;
+}
+
+The location message is defined as shown below:
+service LocationService {
+    rpc Create(LocationMessage) returns (LocationMessage);
+}
+
+grpc_client.py : It is a file that is written to send location to client.
+
+
+To run gRPC and create data, execute the below command:
+kubectl exec -it <location-producer-pod-name> sh
+
+We shall then be in the sh mode.
+To generate random data for different people, execute python grpc_client.py
+
+You shall get data of random values.
